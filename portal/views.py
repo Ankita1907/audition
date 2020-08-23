@@ -41,7 +41,7 @@ def rules(request):
     if request.user.is_authenticated:
         return render(request, 'portal/rules.html')
     else:
-        return redirect( '/portal/index')
+        return redirect( 'index')
 
 
 
@@ -67,7 +67,7 @@ def quiz(request):
             form = exmForm()
         return render(request, 'portal/question.html', {'form': form})
     else:
-        return redirect('/portal/index')
+        return redirect('index')
 
 
 def endexm(request):
