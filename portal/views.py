@@ -74,4 +74,4 @@ def endexm(request):
     if request.user.is_authenticated:
         return render(request, 'portal/endexm.html')
     else:
-        return redirect('/portal/index')
+        return redirect('index')
