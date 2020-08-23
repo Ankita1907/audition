@@ -36,8 +36,12 @@ def signup(request):
 
 
 
+
 def rules(request):
-       return render(request, 'portal/rules.html')
+    if request.user.is_authenticated:
+        return render(request, 'portal/rules.html')
+    else:
+        return redirect( '/portal/index')
 
 
 
@@ -51,18 +55,23 @@ def logout(request):
 
 
 def quiz(request):
-
+    if request.user.is_authenticated:
         if request.method == 'POST':
             form = exmForm(request.POST)
             if form.is_valid():
                 u = form.save()
+                django_logout(request)
 
                 return render(request, 'portal/endexm.html')
         else:
             form = exmForm()
         return render(request, 'portal/question.html', {'form': form})
-
+    else:
+        return redirect('/portal/index')
 
 
 def endexm(request):
-    return render(request, 'portal/endexm.html')
+    if request.user.is_authenticated:
+        return render(request, 'portal/endexm.html')
+    else:
+        return redirect('/portal/index')
